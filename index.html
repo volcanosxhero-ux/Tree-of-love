@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عالم بسبوسة ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080512;color:white;
+ font-family:Cairo,sans-serif;overflow:hidden;
+ user-select:none;-webkit-tap-highlight-color:transparent
+}
+button{font-family:inherit;cursor:pointer;border:0}
+#world{height:100dvh;width:100%;position:relative;overflow:hidden;background:#080512}
+.scene{
+ position:absolute;inset:0;display:none;overflow:hidden;
+ animation:fade .8s ease
+}
+.scene.active{display:flex}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.stars{
+ position:absolute;inset:-30%;
+ pointer-events:none;
+ background-image:
+ radial-gradient(2px 2px at 10% 20%,white 90%,transparent),
+ radial-gradient(2px 2px at 80% 30%,#ffc5ed 90%,transparent),
+ radial-gradient(1px 1px at 30% 75%,white 90%,transparent),
+ radial-gradient(2px 2px at 65% 85%,white 90%,transparent),
+ radial-gradient(1px 1px at 90% 65%,white 90%,transparent);
+ background-size:220px 220px;
+ animation:stars 35s linear infinite
+}
+@keyframes stars{to{background-position:220px 220px}}
+
+.topText{
+ position:absolute;top:6%;left:0;width:100%;
+ text-align:center;z-index:10;padding:0 15px
+}
+.topText h1{
+ font-size:clamp(22px,6vw,36px);margin:0 0 5px;
+ text-shadow:0 0 20px #ff55b7
+}
+.topText p{margin:0;color:#f8c8e7;font-size:14px}
+.hint{
+ position:absolute;bottom:7%;width:100%;text-align:center;
+ font-size:17px;text-shadow:0 0 15px #ff4da9;
+ animation:pulse 1.5s infinite;z-index:10
+}
+@keyframes pulse{50%{opacity:.5;transform:scale(.97)}}
+
+/* 1 - FLOWER */
+
+#flowerScene{
+ align-items:center;justify-content:center;
+ background:radial-gradient(ellipse at 50% 60%,#45203e,#180e27 60%,#080512)
+}
+.flowerArea{
+ position:relative;width:300px;height:340px;margin-top:70px;
+ display:flex;align-items:center;justify-content:center
+}
+.stem{
+ position:absolute;width:12px;height:175px;top:180px;
+ left:144px;border-radius:100%;
+ background:linear-gradient(90deg,#164b31,#64c66b,#164b31);
+ box-shadow:0 0 15px #4bca74
+}
+.leaf{
+ position:absolute;width:75px;height:35px;top:245px;left:82px;
+ background:linear-gradient(120deg,#7be37d,#145b36);
+ border-radius:100% 0 100% 0;transform:rotate(20deg)
+}
+.leaf.two{left:150px;top:280px;transform:scaleX(-1) rotate(20deg)}
+.flower{
+ position:absolute;top:30px;left:50%;
+ width:260px;height:260px;transform:translateX(-50%);
+ filter:drop-shadow(0 0 25px #ff399d)
+}
+.petal{
+ position:absolute;width:88px;height:130px;left:86px;top:0;
+ transform-origin:50% 100%;border-radius:50% 50% 42% 42%;
+ background:radial-gradient(ellipse at 50% 75%,#ffb3df,#ff5ab2 40%,#a81766);
+ box-shadow:inset 0 -10px 20px #a20e5d,inset 5px 5px 15px #ffb6e1,0 0 15px #ff4fa9;
+ transition:.6s;cursor:pointer
+}
+.petal:nth-child(1){transform:rotate(0deg) translateY(-30px)}
+.petal:nth-child(2){transform:rotate(45deg) translateY(-30px)}
+.petal:nth-child(3){transform:rotate(90deg) translateY(-30px)}
+.petal:nth-child(4){transform:rotate(135deg) translateY(-30px)}
+.petal:nth-child(5){transform:rotate(180deg) translateY(-30px)}
+.petal:nth-child(6){transform:rotate(225deg) translateY(-30px)}
+.petal:nth-child(7){transform:rotate(270deg) translateY(-30px)}
+.petal:nth-child(8){transform:rotate(315deg) translateY(-30px)}
+.petal.gone{opacity:0;transform:scale(.1) rotate(100deg);pointer-events:none}
+.flowerCenter{
+ position:absolute;z-index:5;width:75px;height:75px;border-radius:50%;
+ top:93px;left:93px;
+ background:radial-gradient(circle,#fff5a6,#ffc43e 45%,#b86b13);
+ box-shadow:0 0 25px #ffdc67;transition:.7s
+}
+.flowerCenter.hidden{opacity:0;transform:scale(0)}
+.butterfly{position:absolute;font-size:27px;animation:fly 5s ease-in-out infinite alternate}
+.b1{top:15%;left:12%}.b2{top:45%;right:9%;animation-delay:1s}
+.b3{top:65%;left:12%;animation-delay:2s}
+@keyframes fly{
+ 0%{transform:translate(0,0) rotate(-15deg)}
+ 50%{transform:translate(25px,-30px) rotate(15deg)}
+ 100%{transform:translate(-15px,20px) rotate(-10deg)}
+}
+
+/* 2 - BETTER HEART */
+
+#heartScene{
+ align-items:center;justify-content:center;flex-direction:column;
+ background:radial-gradient(circle,#47163f,#10091f 65%,#05040c)
+}
+.heartSvg{
+ width:min(72vw,310px);overflow:visible;
+ filter:drop-shadow(0 0 15px #ff299b) drop-shadow(0 0 45px #e42b9c);
+ animation:heartBeat 1.15s infinite;
+ cursor:pointer
+}
+@keyframes heartBeat{
+ 0%,100%{transform:scale(1)}
+ 15%{transform:scale(1.09)}
+ 30%{transform:scale(1)}
+ 45%{transform:scale(1.06)}
+}
+.heartCaption{margin-top:10px;font-size:17px;color:#ffd8f1}
+
+/* 3 - TREE AND CAMERA */
+
+#treeScene{
+ background:linear-gradient(#1a1033,#352345 65%,#24462d);
+ display:none;align-items:center;justify-content:center
+}
+#treeScene.active{display:flex}
+.treeSky{
+ position:absolute;inset:0;opacity:0;
+ background:
+ radial-gradient(ellipse at 50% 35%,#342c75,#100e34 55%,#03030d);
+ transition:opacity 2.5s
+}
+#treeScene.space .treeSky{opacity:1}
+.treeStars{opacity:0;transition:opacity 2s}
+#treeScene.space .treeStars{opacity:1}
+
+.cameraLayer{
+ position:absolute;inset:0;
+ transition:transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.treeGround{
+ position:absolute;bottom:0;width:100%;height:19%;
+ background:
+ radial-gradient(ellipse at 50% 0%,#82bd58,#32623c 45%,#122b20 90%);
+ border-radius:50% 50% 0 0 / 12% 12% 0 0;
+ box-shadow:0 -20px 70px #58aa61;
+ transition:opacity 2s
+}
+#treeScene.space .treeGround{opacity:0}
+
+.tree{
+ position:absolute;bottom:18%;left:50%;
+ width:250px;height:120px;transform:translateX(-50%);
+ transition:height .85s cubic-bezier(.2,.7,.2,1);
+}
+.trunk{
+ position:absolute;bottom:0;left:111px;width:28px;
+ height:calc(100% - 125px);
+ min-height:5px;
+ background:linear-gradient(90deg,#462218,#91502e 30%,#c1814e 48%,#63301d);
+ border-radius:45% 45% 5% 5%;
+ box-shadow:inset 4px 0 5px #d29a66,0 0 10px #21120f
+}
+.trunk:before,.trunk:after{
+ content:"";position:absolute;width:9px;height:45%;
+ background:linear-gradient(90deg,#47251a,#a86a40);
+ border-radius:100%;top:8%;opacity:.6
+}
+.trunk:before{left:5px;transform:rotate(4deg)}
+.trunk:after{right:3px;transform:rotate(-4deg)}
+
+.crown{
+ position:absolute;top:0;left:50%;width:200px;height:160px;
+ transform:translateX(-50%) scale(.1);
+ opacity:0;transition:transform .8s,opacity .8s
+}
+.crown.show{transform:translateX(-50%) scale(1);opacity:1}
+.leafBall{
+ position:absolute;width:110px;height:110px;border-radius:50%;
+ background:radial-gradient(circle at 32% 25%,#c5ff9b,#57c75d 45%,#176336);
+ box-shadow:inset -10px -12px 20px #176336,0 0 25px #59db73
+}
+.leafBall:nth-child(1){top:0;left:45px}
+.leafBall:nth-child(2){top:40px;left:0}
+.leafBall:nth-child(3){top:40px;right:0}
+.leafBall:nth-child(4){top:65px;left:47px;width:105px;height:95px}
+
+.toolPanel{
+ position:absolute;bottom:4%;z-index:20;text-align:center;width:100%;padding:0 15px
+}
+.progressText{margin-bottom:10px;color:#ffe0f3;font-size:14px}
+.toolButton{
+ background:linear-gradient(135deg,#ff78c8,#a348e8);
+ color:white;border-radius:50px;padding:13px 28px;
+ font-size:17px;font-weight:900;box-shadow:0 0 30px #ed55bb;
+ transition:.2s
+}
+.toolButton:active{transform:scale(.94)}
+#treeScene.space .toolPanel{display:none}
+
+/* 4 - NEON MOSAIC */
+
+#neonScene{
+ align-items:center;justify-content:center;flex-direction:column;
+ background:#02020a
+}
+.neonTitle{
+ position:absolute;top:7%;z-index:5;text-align:center;
+ color:#ff9ee1;font-size:20px;padding:0 15px;
+ text-shadow:0 0 15px #ff30ae
+}
+#heartCanvas{
+ width:min(90vw,650px);height:auto;max-height:70vh;
+ overflow:visible;
+ transform:scale(2.15);
+ transition:transform 7s cubic-bezier(.12,.65,.15,1);
+ filter:drop-shadow(0 0 15px #ff37b9)
+}
+#heartCanvas.zoomed{transform:scale(.83)}
+#neonMessage{
+ position:absolute;bottom:5%;color:#ff9de0;
+ opacity:0;transition:1s;text-shadow:0 0 15px #ff30ae
+}
+#neonMessage.show{opacity:1}
+
+/* 5 - LETTER */
+
+#letterScene{
+ align-items:center;justify-content:center;flex-direction:column;
+ background:radial-gradient(ellipse at 50% 35%,#38133d,#10091e 65%,#03030b);
+ padding:20px;overflow-y:auto
+}
+.miniMosaic{
+ width:min(65vw,250px);
+ filter:drop-shadow(0 0 20px #ff45b5);margin:5px 0 12px
+}
+.letter{
+ max-width:600px;width:100%;text-align:center;
+ font-size:clamp(15px,3.8vw,19px);line-height:2.1;
+ color:#ffe1f3;text-shadow:0 0 15px #ed5db9;
+ white-space:pre-line;min-height:170px
+}
+.finalButton{
+ margin-top:20px;padding:13px 30px;border-radius:40px;
+ color:white;font-size:17px;font-weight:900;
+ background:linear-gradient(120deg,#ff4da9,#923cff);
+ box-shadow:0 0 25px #ff4da9,0 0 50px #923cff;
+ animation:pulse 1.7s infinite;display:none
+}
+
+/* 6 - FALLING PERSON */
+
+#surpriseScene{
+ align-items:center;justify-content:center;flex-direction:column;
+ background:linear-gradient(#08061c,#171039 65%,#14251c)
+}
+.planet{
+ position:absolute;width:150%;height:230px;bottom:-145px;left:-25%;
+ border-radius:50%;
+ background:radial-gradient(ellipse at 50% 10%,#7ba96a,#345a39 55%,#142b1d);
+ box-shadow:0 -15px 70px #64cf75
+}
+.finalTree{
+ position:absolute;bottom:50px;left:12%;
+ width:160px;height:240px;
+ filter:drop-shadow(0 0 12px #65d879)
+}
+.finalTree .wood{
+ position:absolute;bottom:0;left:72px;width:22px;height:145px;
+ background:linear-gradient(90deg,#48251b,#b47a4d,#61321d);
+ border-radius:30% 30% 0 0
+}
+.finalTree .leaf{
+ position:absolute;width:95px;height:95px;top:5px;left:30px;
+ border-radius:50%;
+ background:radial-gradient(circle at 30% 25%,#c7ff9d,#3ba750 60%,#174b2b);
+ box-shadow:0 0 25px #57d76d
+}
+.finalTree .leaf.a{left:0;top:55px}
+.finalTree .leaf.b{left:68px;top:55px}
+
+.fallingGuy{
+ position:absolute;top:-180px;left:50%;
+ width:110px;height:150px;
+ opacity:0;transform:translateX(-50%);
+}
+.fallingGuy.fall{
+ opacity:1;
+ animation:falling 3.4s cubic-bezier(.25,.15,.4,1) forwards
+}
+.person{
+ position:absolute;width:100%;height:100%;
+ transform-origin:50% 50%;
+}
+.head{
+ position:absolute;top:0;left:39px;width:33px;height:36px;
+ border-radius:48%;background:linear-gradient(120deg,#ffd3ac,#d68b62);
+ border:2px solid #7e4b3b
+}
+.hair{
+ position:absolute;top:-3px;left:38px;width:35px;height:17px;
+ border-radius:50% 50% 20% 20%;background:#291b1a;z-index:2
+}
+.body{
+ position:absolute;top:35px;left:34px;width:45px;height:60px;
+ border-radius:15px 15px 8px 8px;
+ background:linear-gradient(90deg,#3b52a6,#729bff,#344b9a);
+ border:2px solid #a5b9ff
+}
+.arm{
+ position:absolute;top:43px;width:15px;height:52px;
+ border-radius:15px;background:#e9ae88;transform-origin:top
+}
+.arm.left{left:23px;transform:rotate(35deg)}
+.arm.right{left:76px;transform:rotate(-35deg)}
+.leg{
+ position:absolute;top:89px;width:18px;height:55px;
+ border-radius:12px;background:#252a43;transform-origin:top
+}
+.leg.left{left:39px;transform:rotate(15deg)}
+.leg.right{left:57px;transform:rotate(-15deg)}
+.shoe{
+ position:absolute;bottom:0;width:28px;height:12px;
+ background:#17121e;border-radius:10px
+}
+.leg.left .shoe{left:-6px}
+.leg.right .shoe{left:-5px}
+
+@keyframes falling{
+ 0%{top:-180px;transform:translateX(-50%) rotate(-20deg)}
+ 25%{transform:translateX(-50%) rotate(120deg)}
+ 55%{transform:translateX(-50%) rotate(290deg)}
+ 78%{top:65%;transform:translateX(-50%) rotate(500deg)}
+ 88%{top:72%;transform:translateX(-50%) rotate(550deg)}
+ 94%{top:68%;transform:translateX(-50%) rotate(530deg)}
+ 100%{top:72%;transform:translateX(-50%) rotate(540deg)}
+}
+.flagPole{
+ position:absolute;left:calc(50% + 25px);top:73%;
+ height:90px;width:4px;background:#ddd;
+ opacity:0;transition:.5s
+}
+.flag{
+ position:absolute;left:calc(50% + 29px);top:73%;
+ background:linear-gradient(135deg,#fff,#f5e9f0);
+ color:#b00055;font-weight:900;font-size:13px;
+ padding:9px 12px;border-radius:3px;
+ box-shadow:0 0 20px white;opacity:0;
+ transform:scale(.5);transition:.5s;white-space:nowrap
+}
+.flag.show,.flagPole.show{opacity:1}
+.flag.show{transform:scale(1)}
+.joke{
+ position:absolute;bottom:7%;width:100%;text-align:center;
+ font-size:clamp(17px,4vw,23px);color:white;
+ opacity:0;transition:1s;text-shadow:0 0 15px #ff5cbf
+}
+.joke.show{opacity:1}
+
+@media(max-height:650px){
+ .flowerArea{transform:scale(.8);margin-top:55px}
+ .topText{top:3%}
+ #heartCanvas{max-height:58vh}
+}
+</style>
+</head>
+
+<body>
+<div id="world">
+
+<!-- FLOWER -->
+<section id="flowerScene" class="scene active">
+ <div class="topText">
+  <h1>فيه حاجة حلوة مستنياكي ❤️</h1>
+  <p>بس الأول عايزك تدوسي على كل بتلات الوردة</p>
+ </div>
+ <div class="butterfly b1">🦋</div>
+ <div class="butterfly b2">🦋</div>
+ <div class="butterfly b3">🦋</div>
+ <div class="flowerArea">
+  <div class="stem"></div><div class="leaf"></div><div class="leaf two"></div>
+  <div class="flower">
+   <div class="petal"></div><div class="petal"></div>
+   <div class="petal"></div><div class="petal"></div>
+   <div class="petal"></div><div class="petal"></div>
+   <div class="petal"></div><div class="petal"></div>
+   <div class="flowerCenter"></div>
+  </div>
+ </div>
+ <div class="hint" id="flowerHint">دوسي عليها يا بسبوسة 🌹</div>
+</section>
+
+<!-- HEART -->
+<section id="heartScene" class="scene">
+ <div class="stars"></div>
+ <div class="topText">
+  <h1>لقيتي المفاجأة؟</h1>
+  <p>ده قلب حد بيحبك أوي ❤️</p>
+ </div>
+
+ <svg class="heartSvg" id="loveHeart" viewBox="0 0 300 280">
+  <defs>
+   <linearGradient id="heartGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ffb2e4"/>
+    <stop offset=".35" stop-color="#ff4ba9"/>
+    <stop offset=".7" stop-color="#e4117c"/>
+    <stop offset="1" stop-color="#85094f"/>
+   </linearGradient>
+   <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
+    <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+   </linearGradient>
+  </defs>
+  <path d="M150 255 C125 229 18 161 18 82 C18 1 119 -13 150 66 C181 -13 282 1 282 82 C282 161 175 229 150 255Z"
+   fill="url(#heartGradient)" stroke="#ffb6e4" stroke-width="3"/>
+  <path d="M150 244 C110 208 29 152 29 85 C29 34 77 18 109 39"
+   fill="none" stroke="url(#shine)" stroke-width="9" stroke-linecap="round"/>
+  <text x="150" y="145" text-anchor="middle" font-size="31"
+   font-family="Cairo" font-weight="900" fill="white"
+   style="filter:drop-shadow(0 3px 4px #80004a)">بسبوسة</text>
+  <text x="150" y="177" text-anchor="middle" font-size="17" fill="#ffe4f4">♥</text>
+ </svg>
+ <div class="hint">دوسي على القلب يا قمري ❤️</div>
+</section>
+
+<!-- TREE -->
+<section id="treeScene" class="scene">
+ <div class="treeSky"></div>
+ <div class="stars treeStars"></div>
+
+ <div class="cameraLayer" id="cameraLayer">
+  <div class="treeGround"></div>
+  <div class="tree" id="tree">
+   <div class="trunk"></div>
+   <div class="crown" id="crown">
+    <div class="leafBall"></div>
+    <div class="leafBall"></div>
+    <div class="leafBall"></div>
+    <div class="leafBall"></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="topText">
+  <h1 id="treeTitle">يلا نزرع حاجة سوا 🌱</h1>
+  <p id="treeDescription">كل دوسة هتكبّر شجرة حبنا</p>
+ </div>
+
+ <div class="toolPanel" id="toolPanel">
+  <div class="progressText" id="treeProgress">لسه الشجرة صغيرة.. يلا كملي ❤️</div>
+  <button class="toolButton" id="plantButton">🪴 ازرعي يا بسبوسة</button>
+ </div>
+</section>
+
+<!-- NEON HEART -->
+<section id="neonScene" class="scene">
+ <div class="stars"></div>
+ <div class="neonTitle" id="neonTitle">بصي فوق يا بسبوسة... ✨</div>
+ <canvas id="heartCanvas" width="800" height="800"></canvas>
+ <div id="neonMessage">كل قلب فيهم حكاية ❤️</div>
+</section>
+
+<!-- LETTER -->
+<section id="letterScene" class="scene">
+ <div class="stars"></div>
+ <canvas class="miniMosaic" id="miniCanvas" width="800" height="800"></canvas>
+ <div class="letter" id="letter"></div>
+ <button class="finalButton" id="surpriseButton">مفاجأة أخيرة 👀</button>
+</section>
+
+<!-- SURPRISE -->
+<section id="surpriseScene" class="scene">
+ <div class="stars"></div>
+ <div class="planet"></div>
+
+ <div class="finalTree">
+  <div class="leaf"></div>
+  <div class="leaf a"></div>
+  <div class="leaf b"></div>
+  <div class="wood"></div>
+ </div>
+
+ <div class="fallingGuy" id="fallingGuy">
+  <div class="person">
+   <div class="hair"></div>
+   <div class="head"></div>
+   <div class="body"></div>
+   <div class="arm left"></div>
+   <div class="arm right"></div>
+   <div class="leg left"><div class="shoe"></div></div>
+   <div class="leg right"><div class="shoe"></div></div>
+  </div>
+ </div>
+
+ <div class="flagPole" id="flagPole"></div>
+ <div class="flag" id="flag">بحبك يا بسملة ❤️</div>
+ <div class="joke" id="joke">عرفتي أنا وقعت منين يبت؟ 😂</div>
+</section>
+
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+function goTo(id){
+ document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+ $(id).classList.add('active');
+}
+
+function soundTap(){
+ try{
+  const a=new(window.AudioContext||window.webkitAudioContext)();
+  const o=a.createOscillator(),g=a.createGain();
+  o.connect(g);g.connect(a.destination);
+  o.frequency.value=520;
+  g.gain.setValueAtTime(.035,a.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.12);
+  o.start();o.stop(a.currentTime+.12);
+ }catch(e){}
+}
+
+/* FLOWER */
+
+let petalsLeft=8;
+document.querySelectorAll('.petal').forEach(p=>{
+ p.addEventListener('click',()=>{
+  if(p.classList.contains('gone'))return;
+  soundTap();
+  p.classList.add('gone');
+  petalsLeft--;
+  $('flowerHint').textContent=petalsLeft?
+   `فاضل ${petalsLeft} بتلات.. كملي يا بسبوسة ❤️`:
+   'استني المفاجأة...';
+  if(!petalsLeft){
+   setTimeout(()=>{
+    document.querySelector('.flowerCenter').classList.add('hidden');
+    setTimeout(()=>goTo('heartScene'),700);
+   },500);
+  }
+ });
+});
+
+/* HEART */
+
+$('loveHeart').addEventListener('click',()=>{
+ soundTap();
+ goTo('treeScene');
+});
+
+/* TREE AND CAMERA */
+
+let growth=0;
+const maxGrowth=14;
+
+$('plantButton').addEventListener('click',()=>{
+ if(growth>=maxGrowth)return;
+ soundTap();
+ growth++;
+
+ // الجذع ينمو من الأرض والتاج يفضل في نهايته
+ const height=140+growth*95;
+ $('tree').style.height=height+'px';
+
+ if(growth>=2)$('crown').classList.add('show');
+
+ // الكاميرا تتابع قمة الشجرة
+ const cameraOffset=Math.max(0,height-280);
+ $('cameraLayer').style.transform=`translateY(${cameraOffset}px)`;
+
+ $('treeProgress').textContent=
+ `شجرة حبنا بتكبر.. ${Math.round(growth/maxGrowth*100)}% ❤️`;
+
+ if(growth===4){
+  $('treeTitle').textContent='كبرت شوية أهو 🌳';
+  $('treeDescription').textContent='بس لسه قدامنا مشوار!';
+ }
+ if(growth===8){
+  $('treeTitle').textContent='قربنا من السما! ☁️';
+  $('treeDescription').textContent='يلا نطلع أعلى وأعلى!';
+ }
+ if(growth===11){
+  $('treeTitle').textContent='إحنا بقينا فوق السحاب! 🚀';
+  $('treeDescription').textContent='بصي لفوق!';
+ }
+ if(growth===maxGrowth){
+  $('treeTitle').textContent='وصلنا للفضاء! 🌌';
+  $('treeDescription').textContent='استعدي تشوفي حكاية حبنا';
+  $('treeScene').classList.add('space');
+  setTimeout(()=>{
+   goTo('neonScene');
+   startNeon();
+  },2800);
+ }
+});
+
+/* TRUE HEART MOSAIC */
+
+const canvas=$('heartCanvas');
+const ctx=canvas.getContext('2d');
+
+const colors=[
+ '#ff39ae','#ff69dc','#b24dff','#45eaff',
+ '#ff355d','#ff9d4d','#b77bff','#ff8ac7'
+];
+
+function insideHeart(x,y){
+ return Math.pow(x*x+y*y-1,3)-x*x*y*y*y<=0;
+}
+
+const dots=[];
+for(let y=-1.18;y<=1.18;y+=.075){
+ for(let x=-1.18;x<=1.18;x+=.075){
+  if(insideHeart(x,-y)){
+   dots.push({
+    x:400+x*290,
+    y:400+y*290,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    size:12+Math.random()*3
+   });
+  }
+ }
+}
+
+// نبدأ من المنتصف للخارج لتكوين الشكل تدريجيا
+dots.sort((a,b)=>{
+ const da=Math.hypot(a.x-400,a.y-400);
+ const db=Math.hypot(b.x-400,b.y-400);
+ return da-db;
+});
+
+function drawMiniHeart(x,y,size,color,alpha){
+ ctx.save();
+ ctx.translate(x,y);
+ ctx.scale(size/30,size/30);
+ ctx.globalAlpha=alpha;
+ ctx.shadowBlur=17;
+ ctx.shadowColor=color;
+ ctx.strokeStyle=color;
+ ctx.lineWidth=2.8;
+ ctx.lineJoin='round';
+ ctx.beginPath();
+ ctx.moveTo(0,10);
+ ctx.bezierCurveTo(-27,-8,-14,-25,0,-10);
+ ctx.bezierCurveTo(14,-25,27,-8,0,10);
+ ctx.stroke();
+ ctx.restore();
+}
+
+let neonStart=0;
+let neonFinished=false;
+let mosaicProgress=0;
+
+function startNeon(){
+ neonStart=performance.now();
+ neonFinished=false;
+ mosaicProgress=0;
+ canvas.classList.remove('zoomed');
+ $('neonTitle').textContent='بصي فوق يا بسبوسة... ✨';
+ requestAnimationFrame(drawNeon);
+}
+
+function drawNeon(time){
+ if(!neonStart)return;
+
+ const elapsed=(time-neonStart)/1000;
+ ctx.clearRect(0,0,800,800);
+
+ // كل قلب صغير بيتكون لوحده بالتتابع
+ const duration=9;
+ mosaicProgress=Math.min(1,elapsed/duration);
+ const visible=Math.floor(dots.length*mosaicProgress);
+
+ for(let i=0;i<visible;i++){
+  const p=dots[i];
+  const appear=Math.min(1,(elapsed-i/dots.length*duration)*7);
+  const glow=.85+Math.sin(time*.004+i*.2)*.15;
+  drawMiniHeart(p.x,p.y,p.size,p.color,Math.max(0,appear)*glow);
+ }
+
+ // الكاميرا تبدأ قريبة جدا ثم تكشف القلب كله
+ if(elapsed>9&&!canvas.classList.contains('zoomed')){
+  canvas.classList.add('zoomed');
+  $('neonTitle').textContent='كل القلوب الصغيرة دي بقت قلب واحد كبير! ❤️';
+ }
+
+ if(elapsed>15&&!neonFinished){
+  neonFinished=true;
+  $('neonMessage').classList.add('show');
+  $('neonTitle').textContent='قلب كبير معمول من قلوب كتير.. عشانك 💗';
+  setTimeout(()=>{
+   goTo('letterScene');
+   showLetter();
+  },4500);
+ }
+
+ if(!neonFinished)requestAnimationFrame(drawNeon);
+}
+
+/* LETTER */
+
+const message=
+'بحبك أوي بجد ❤️\n\n'+
+'واللي كنتي بتزرعيه ده شجرة حبنا.. 🌳\n\n'+
+'وأنا بجد بدمنك يا أحلى مامي وأحلى بنوتي وأحلى أختي وحبيبتي ومراتي ودنيتي وعالمي في الدنيا دي كلها.. ❤️\n\n'+
+'إنتي قمري بس اللي على الأرض 🌙';
+
+function copyHeart(){
+ const mini=$('miniCanvas');
+ mini.getContext('2d').drawImage(canvas,0,0,800,800);
+}
+
+function showLetter(){
+ copyHeart();
+ let i=0;
+ const target=$('letter');
+ target.textContent='';
+
+ function type(){
+  if(i<message.length){
+   target.textContent+=message.charAt(i++);
+   setTimeout(type,48);
+  }else{
+   $('surpriseButton').style.display='inline-block';
+  }
+ }
+ type();
+}
+
+/* FINAL FALL */
+
+$('surpriseButton').addEventListener('click',()=>{
+ soundTap();
+ goTo('surpriseScene');
+
+ setTimeout(()=>{
+  $('fallingGuy').classList.add('fall');
+ },300);
+
+ setTimeout(()=>{
+  $('flagPole').classList.add('show');
+  $('flag').classList.add('show');
+ },3650);
+
+ setTimeout(()=>{
+  $('joke').classList.add('show');
+ },4500);
+});
+</script>
+</body>
+</html>
